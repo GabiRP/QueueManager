@@ -5,5 +5,5 @@ Requires Fabric API
 ### Build
 Search it on google, i'm too lazy to explain it here.
 ### Discord bot
-[Here](https://discord.com/developers/docs/getting-started#step-1-creating-an-app)
+[Here](https://discord.com/developers/docs/getting-started#step-1-creating-an-app)  
 Once you have it, run the C# application, wait for it to close and paste your token into the generated ``config.json`` file.
