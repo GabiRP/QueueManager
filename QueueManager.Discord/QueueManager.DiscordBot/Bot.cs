@@ -36,7 +36,8 @@ public class Bot : DiscordClientService
         _Client = Client;
 
         await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
-        var user = Client.GetGuild(901954023224139796).GetUser(507955112027750401);
+        
+        var user = Client.GetGuild(901954023224139796/*CHANGE THIS*/).GetUser(507955112027750401/*CHANGE THIS*/);
         _dm = await user.CreateDMChannelAsync();
 
         if (_dm == null)
