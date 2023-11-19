@@ -7,6 +7,8 @@ import net.minecraft.text.Text;
 import java.lang.reflect.Field;
 import java.net.http.WebSocket;
 import java.net.http.WebSocket.Listener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,7 +24,7 @@ public class WebSocketListener implements Listener {
     public WebSocketListener(Gson gson){
         this.gson = gson;
     }
-
+    public List<Runnable> runnables;
     private Boolean responding = false;
     private WebSocket webSocket;
 
@@ -32,6 +34,7 @@ public class WebSocketListener implements Listener {
         webSocket.sendText(gson.toJson(new WebSocketMessage(MessageType.HEARTBEAT, 0, null)), true);
         responding = true;
         this.webSocket = webSocket;
+        runnables = new ArrayList<Runnable>();
         setupRunnables();
     }
 
@@ -107,8 +110,17 @@ public class WebSocketListener implements Listener {
                 QueueManagerClient.LOGGER.error(e.toString());
             }
         };
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(heartbeatRunnable, 0, 3, TimeUnit.MINUTES);
         executor.scheduleAtFixedRate(queueRunnable, 0, 15, TimeUnit.SECONDS);
+    }
+    ScheduledExecutorService executor;
+
+    public void Stop(){
+        if(executor == null) return;
+        executor.shutdown();
+        webSocket.sendText(gson.toJson(new WebSocketMessage(MessageType.BYE, 0, null)), true);
+        webSocket.sendClose(WebSocket.NORMAL_CLOSURE, "Bye");
+        webSocket = null;
     }
 }

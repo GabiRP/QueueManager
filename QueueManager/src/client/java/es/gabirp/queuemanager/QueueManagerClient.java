@@ -30,23 +30,6 @@ public class QueueManagerClient implements ClientModInitializer {
 
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
 		ClientCommandRegistrationCallback.EVENT.register(QueueManagerClient::registerCommands);
-		try{
-			final URI websocketEndpoint = new URI("ws://127.0.0.1:8080/queue");
-			WebSocketClient client = new WebSocketClient(websocketEndpoint);
-
-			/*//WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-			//userSession = container.connectToServer(this, endpointUrl);
-
-			QueueManagerClient.LOGGER.info("Starting websocket client");
-			ClientManager clientManager = ClientManager.createClient();
-			QueueManagerClient.LOGGER.info("Client created");
-			client.userSession = clientManager.connectToServer(client, websocketEndpoint);
-			QueueManagerClient.LOGGER.info("Connected to server");
-			QueueManagerClient.LOGGER.info("Websocket client started");
-			//setupRunnables();*/
-		}catch(Exception e){
-			LOGGER.error(e.toString());
-		}
 
 	}
 

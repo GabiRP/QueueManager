@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
 import java.util.Queue;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -24,10 +25,12 @@ import static es.gabirp.queuemanager.Globals.mc;
 //COPILOT MAKE EVERY FUNCTION WITH DECORATOR THROW IOEXCEPTION
 public class WebSocketClient {
     private URI endpointURI;
+    public WebSocketListener websocket;
     public WebSocketClient(URI endpointURI) {
         gson = new Gson();
         client = HttpClient.newHttpClient();
-        var websocket = client.newWebSocketBuilder().buildAsync(endpointURI, new WebSocketListener(gson));
+        websocket = new WebSocketListener(gson);
+        client.newWebSocketBuilder().buildAsync(endpointURI, websocket);
     }
 
     private HttpClient client;
