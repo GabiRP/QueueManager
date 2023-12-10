@@ -73,7 +73,6 @@ public class WebSocketListener implements Listener {
             }
         };
         Runnable queueRunnable = () -> {
-
             if(mc.getCurrentServer() == null || mc.gui.getTabList() == null){
                 if(isConnected){
                     webSocket.sendText(gson.toJson(new WebSocketMessage(MessageType.SERVERDISCONNECT, 0, null)), true);
@@ -111,6 +110,8 @@ public class WebSocketListener implements Listener {
                     if(!match.find() || match.group(1) == "1"){
                         webSocket.sendText(gson.toJson(new WebSocketMessage(MessageType.ENDQUEUE, 0, null)), true);
                         endedQueue = true;
+                        QueueManager.getInstance().getModule().setToggled(false);
+                        RusherHackAPI.getNotificationManager().send(NotificationType.INFO, "Queue ended, the module has been automatically disabled and you have been disconnected from the websocket.");
                         return;
                     }
 

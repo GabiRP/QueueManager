@@ -11,14 +11,16 @@ import org.rusherhack.client.api.plugin.Plugin;
 public class QueueManager extends Plugin {
 
 	private static QueueManager INSTANCE;
+	public QueueManagerModule module;
 	@Override
 	public void onLoad() {
 		INSTANCE = this;
 		this.getLogger().info(this.getName() + " loaded!");
 		
 		//creating and registering a new module
-		final QueueManagerModule queueManagerModule = new QueueManagerModule();
-		RusherHackAPI.getModuleManager().registerFeature(queueManagerModule);
+		module = new QueueManagerModule();
+
+		RusherHackAPI.getModuleManager().registerFeature(module);
 	}
 	
 	@Override
@@ -44,6 +46,9 @@ public class QueueManager extends Plugin {
 	@Override
 	public String[] getAuthors() {
 		return new String[]{"GabiRP"};
+	}
+	public QueueManagerModule getModule(){
+		return module;
 	}
 
 	public static QueueManager getInstance() {
