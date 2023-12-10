@@ -37,12 +37,14 @@ public class Bot : DiscordClientService
 
         await Task.Delay(TimeSpan.FromSeconds(5), stoppingToken);
         
-        var user = Client.GetGuild(901954023224139796/*CHANGE THIS*/).GetUser(507955112027750401/*CHANGE THIS*/);
+        var user = Client.GetGuild(_config.GuildId).GetUser(_config.UserId);
         _dm = await user.CreateDMChannelAsync();
 
         if (_dm == null)
         {
             Logger.LogError("DM Channel is NULL");
+            Logger.LogError("User might have dms disabled");
+            Logger.LogError("Or maybe one of the IDs is wrong");
             return;
         }
         
