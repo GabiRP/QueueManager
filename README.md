@@ -12,7 +12,7 @@ The bot will notify you when:
 ### Discord bot
 [Here](https://discord.com/developers/docs/getting-started#step-1-creating-an-app)  
 Once you have it, run the C# application, wait for it to close and paste your token into the generated ``config.json`` file.  
-You will also have to create a discord server (and invite the bot to it) and paste its id and your own user id into the ``config.json`` file.  
+You will also have to create a discord server (and invite the bot to it) and paste the server's id and your own user id into the ``config.json`` file.  
 Make sure you have DMs enabled for that server
 ### Build
 Search it on google, i'm too lazy to explain it here.  
