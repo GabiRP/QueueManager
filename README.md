@@ -11,8 +11,8 @@ The bot will notify you when:
 - You are close to or have finished the queue
 ### Discord bot
 First, Enable Discord Developer Mode in your client..
-[Here](https://discord.com/developers/docs/getting-started#step-1-creating-an-app)  
-Once you have it, run the C# application, wait for it to close and paste your token into the generated ``config.json`` file.  
+Then go [Here](https://discord.com/developers/docs/getting-started#step-1-creating-an-app)
+Once you have gone there, and enabled developer mode, run the C# application, wait for it to close and paste your token into the generated ``config.json`` file.  
 You will also have to create a discord server (and invite the bot to it)
 Right Click the server icon in your vertical server bar, and click "Copy Server ID". Paste it to a notepad
 Then Right Click your user account, and copy your user id. Paste it to a notepad
